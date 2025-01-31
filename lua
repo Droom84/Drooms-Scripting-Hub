@@ -206,10 +206,10 @@ end)
    end,
 })
 
-local GameTab = Window:CreateTab("🌏Game Copy", nil)
-local GameSection = MainTab:CreateSection("Game")
+local GamecopyTab = Window:CreateTab("🌏Game Copy", nil)
+local Section = GamecopyTab:CreateSection("Game ")
 
-local Button = GameTab:CreateButton({
+local Button = GamecopyTab:CreateButton({
    Name = "Copy Game",
    Callback = function()
   		local Params = {
