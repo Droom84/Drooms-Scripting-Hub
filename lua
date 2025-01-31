@@ -216,23 +216,7 @@ local Button = MainTab:CreateButton({
 })
 
 local GameTab = Window:CreateTab("🌏Game Copy", nil)
-local Section = GameTab:CreateSection("Game ")
-
-local Button = GameTab:CreateButton({
-   Name = "Copy Game",
-   Callback = function()
-  		local Params = {
-    RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
-    SSI = "saveinstance",
-}
-
-local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
-
-local CustomOptions = { SafeMode = true, timeout = 15, SaveBytecode = true, noscripts = false }
-
-synsaveinstance(CustomOptions)
-   end,
-})
+local Section = GameTab:CreateSection("Game")
 
 local PillarTab = Window:CreateTab("⛩ Pillar Chase", nil)
 local Section = PillarTab:CreateSection("Pillar")
