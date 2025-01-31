@@ -45,7 +45,7 @@ Rayfield:Notify({
 })
 
 local Button = MainTab:CreateButton({
-   Name = "Infinate Jump",
+   Name = "Infinite Jump",
    Callback = function()
 local InfiniteJumpEnabled = true
 game:GetService("UserInputService").JumpRequest:connect(function()
@@ -65,7 +65,7 @@ local humanoid = character:WaitForChild("Humanoid")
 local rootPart = character:WaitForChild("HumanoidRootPart")
 
 local flying = false
-local flySpeed = 50 -- Speed at which the player flies
+local flySpeed = 100 -- Speed at which the player flies
 
 
 local function startFlying()
