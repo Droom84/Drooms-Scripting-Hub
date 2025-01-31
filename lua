@@ -34,8 +34,10 @@ local Window = Rayfield:CreateWindow({
    }
 })
 
-local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+local MainTab = Window:CreateTab("🏠 Home", nil)-- Title, Image
+local GameTab = Window:CreateTab("🌏Game Copy", nil)
 local MainSection = MainTab:CreateSection("Main")
+local GameSection = MainTab:CreateSection("Game")
 
 Rayfield:Notify({
    Title = "Notification",
@@ -204,4 +206,25 @@ game:GetService("RunService").Heartbeat:Connect(function()
 end)
 
    end,
+})
+
+local Button = GameTab:CreateButton({
+   Name = "Copy Game",
+   Callback = function()
+  		local Params = {
+    RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
+    SSI = "saveinstance",
+}
+
+local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
+
+local CustomOptions = { SafeMode = true, timeout = 15, SaveBytecode = true, noscripts = false }
+
+synsaveinstance(CustomOptions)
+   end,
+Rayfield:Notify({
+   Title = "Game Copy",
+   Content = "The Game is currently copying. When its done look in your executor workspace folder.",
+   Duration = 5,
+   Image = nil,
 })
