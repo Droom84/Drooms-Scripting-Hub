@@ -261,10 +261,10 @@ local Button = ArsenalTab:CreateButton({
    end,
 })
 
-local MM2Tab = Window:CreateTab("🔪 MM2", nil)
-local Section = MM2Tab:CreateSection("MM2")
+local mmTab = Window:CreateTab("🔪 MM2", nil)
+local Section = mmTab:CreateSection("mm")
 
-local Button = MM2Tab:CreateButton({
+local Button = mmTab:CreateButton({
    Name = "MM2 Menu",
    Callback = function()
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring'))()
