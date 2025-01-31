@@ -215,13 +215,6 @@ local Button = MainTab:CreateButton({
    end,
 })
 
-local Button = MainTab:CreateButton({
-   Name = "Fling GUI",
-   Callback = function()
-		loadstring(game:HttpGetloadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()()
-   end,
-})
-
 local GameTab = Window:CreateTab("🌏Game Copy", nil)
 local Section = GameTab:CreateSection("Game ")
 
