@@ -224,3 +224,42 @@ local Button = PillarTab:CreateButton({
    		 loadstring(game:HttpGet('https://raw.githubusercontent.com/dqvh/dqvh/main/pillar%20chase%202.lua'))() 
    end,
 })
+
+local GameTab = Window:CreateTab("🌏Copy Games", nil)
+local Section = GameTab:CreateSection("Game")
+
+local Button = GameTab:CreateButton({
+   Name = "Copy Game",
+   Callback = function()
+		local Params = {
+    RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
+    SSI = "saveinstance",
+}
+
+local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
+
+local CustomOptions = { SafeMode = true, timeout = 15, SaveBytecode = true, noscripts = false }
+
+synsaveinstance(CustomOptions)
+   end,
+})
+
+local ArsenalTab = Window:CreateTab("🔫 Arsenal", nil)
+local Section = ArsenalTab:CreateSection("Arsenal")
+
+local Button = ArsenalTab:CreateButton({
+   Name = "Arsenal Cheat Menu",
+   Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
+   end,
+})
+
+local MmlTab = Window:CreateTab("🔪 MM2", nil)
+local Section = MmTab:CreateSection("MM2")
+
+local Button = MM2Tab:CreateButton({
+   Name = "MM2 Cheat Menu",
+   Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring'))()
+   end,
+})
