@@ -215,9 +215,6 @@ local Button = MainTab:CreateButton({
    end,
 })
 
-local GameTab = Window:CreateTab("🌏Game Copy", nil)
-local Section = GameTab:CreateSection("Game")
-
 local PillarTab = Window:CreateTab("⛩ Pillar Chase", nil)
 local Section = PillarTab:CreateSection("Pillar")
 
