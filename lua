@@ -35,9 +35,7 @@ local Window = Rayfield:CreateWindow({
 })
 
 local MainTab = Window:CreateTab("🏠 Home", nil)-- Title, Image
-local GameTab = Window:CreateTab("🌏Game Copy", nil)
 local MainSection = MainTab:CreateSection("Main")
-local GameSection = MainTab:CreateSection("Game")
 
 Rayfield:Notify({
    Title = "Notification",
@@ -207,6 +205,9 @@ end)
 
    end,
 })
+
+local GameTab = Window:CreateTab("🌏Game Copy", nil)
+local GameSection = MainTab:CreateSection("Game")
 
 local Button = GameTab:CreateButton({
    Name = "Copy Game",
