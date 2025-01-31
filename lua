@@ -337,3 +337,13 @@ end
 game.Players.PlayerAdded:Connect(playerAdded)
    end,
 })
+
+local RivalsTab = Window:CreateTab("🧨 Rivals", nil)
+local Section = RivalsTab:CreateSection("Rivals")
+
+local Button = RivalsTab:CreateButton({
+   Name = "Rivals Cheat Script",
+   Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/EzWinsV4/FlameForRobloxRivals/refs/heads/main/Main.lua", true))()
+   end,
+})
