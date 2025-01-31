@@ -202,7 +202,7 @@ end)
 })
 
 local Button = MainTab:CreateButton({
-   Name = "Infinate Yield",
+   Name = "Infinite Yield",
    Callback = function()
    		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() 
    end,
@@ -212,6 +212,13 @@ local Button = MainTab:CreateButton({
    Name = "All in 1 Menu",
    Callback = function()
    		loadstring(game:HttpGet('https://raw.githubusercontent.com/4zuren0name/ZeroGGG/refs/heads/main/ZeroG'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Fling GUI",
+   Callback = function()
+		loadstring(game:HttpGetloadstring(game:HttpGet('https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player'))()()
    end,
 })
 
@@ -241,5 +248,25 @@ local Button = PillarTab:CreateButton({
    Name = "Pillar Chase Menu",
    Callback = function()
    		 loadstring(game:HttpGet('https://raw.githubusercontent.com/dqvh/dqvh/main/pillar%20chase%202.lua'))() 
+   end,
+})
+
+local ArsenalTab = Window:CreateTab("🔫 Arsenal", nil)
+local Section = ArsenalTab:CreateSection("Arsenal")
+
+local Button = ArsenalTab:CreateButton({
+   Name = "Arsenal Cheating Menu",
+   Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
+   end,
+})
+
+local MM2Tab = Window:CreateTab("🔪 MM2", nil)
+local Section = MM2Tab:CreateSection("MM2")
+
+local Button = MM2Tab:CreateButton({
+   Name = "MM2 Menu",
+   Callback = function()
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring'))()
    end,
 })
