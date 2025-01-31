@@ -208,6 +208,13 @@ local Button = MainTab:CreateButton({
    end,
 })
 
+local Button = MainTab:CreateButton({
+   Name = "All in 1 Menu",
+   Callback = function()
+   		loadstring(game:HttpGet('https://raw.githubusercontent.com/4zuren0name/ZeroGGG/refs/heads/main/ZeroG'))()
+   end,
+})
+
 local GameTab = Window:CreateTab("🌏Game Copy", nil)
 local Section = GameTab:CreateSection("Game ")
 
