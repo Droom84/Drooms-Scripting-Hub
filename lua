@@ -250,23 +250,3 @@ local Button = PillarTab:CreateButton({
    		 loadstring(game:HttpGet('https://raw.githubusercontent.com/dqvh/dqvh/main/pillar%20chase%202.lua'))() 
    end,
 })
-
-local ArsenalTab = Window:CreateTab("🔫 Arsenal", nil)
-local Section = ArsenalTab:CreateSection("Arsenal")
-
-local Button = ArsenalTab:CreateButton({
-   Name = "Arsenal Cheating Menu",
-   Callback = function()
-		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
-   end,
-})
-
-local mmTab = Window:CreateTab("🔪 MM2", nil)
-local Section = mmTab:CreateSection("mm")
-
-local Button = mmTab:CreateButton({
-   Name = "MM2 Menu",
-   Callback = function()
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/vertex-peak/vertex/refs/heads/main/loadstring'))()
-   end,
-})
