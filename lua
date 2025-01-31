@@ -169,3 +169,39 @@ local Toggle = MainTab:CreateToggle({
    end
 })
 
+local Button = MainTab:CreateButton({
+   Name = "No Clip (J)",
+   Callback = function()
+   		local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+local humanoid = character:WaitForChild("Humanoid")
+
+local noclip = false
+
+-- Toggle noclip when the player presses the "J" key
+local function toggleNoclip()
+    noclip = not noclip
+end
+
+-- Detect when the "J" key is pressed
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.J then
+        toggleNoclip()
+    end
+end)
+
+-- Update the player's movement based on noclip status
+game:GetService("RunService").Heartbeat:Connect(function()
+    if noclip then
+        humanoid.PlatformStand = true
+        character.HumanoidRootPart.CanCollide = false
+        character:SetPrimaryPartCFrame(character.HumanoidRootPart.CFrame + character.HumanoidRootPart.Velocity)
+    else
+        humanoid.PlatformStand = false
+        character.HumanoidRootPart.CanCollide = true
+    end
+end)
+
+   end,
+})
