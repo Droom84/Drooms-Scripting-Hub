@@ -226,3 +226,13 @@ local CustomOptions = { SafeMode = true, timeout = 15, SaveBytecode = true, nosc
 synsaveinstance(CustomOptions)
    end,
 })
+
+local PillarTab = Window:CreateTab("⛩ Pillar Chase", nil)
+local Section = PillarTab:CreateSection("Pillar")
+
+local Button = PillarTab:CreateButton({
+   Name = "Pillar Chase Menu",
+   Callback = function()
+   		 loadstring(game:HttpGet('https://raw.githubusercontent.com/dqvh/dqvh/main/pillar%20chase%202.lua'))() 
+   end,
+})
