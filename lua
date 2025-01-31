@@ -57,7 +57,7 @@ end) -- The function that takes place when the button is pressed
 })
 
 local Button = MainTab:CreateButton({
-   Name = "Fly (F)",
+   Name = "Fly (Y)",
    Callback = function()
 local player = game.Players.LocalPlayer
 local character = player.Character or player.CharacterAdded:Wait()
@@ -116,7 +116,7 @@ end
 
 -- Toggle fly on and off with the "F" key
 game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.F then
+    if input.KeyCode == Enum.KeyCode.Y then
         if flying then
             stopFlying()
         else
