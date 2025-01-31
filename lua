@@ -254,7 +254,7 @@ local Button = ArsenalTab:CreateButton({
    end,
 })
 
-local MM2lTab = Window:CreateTab("🔪 MM2", nil)
+local MM2Tab = Window:CreateTab("🔪 MM2", nil)
 local Section = MM2Tab:CreateSection("MM2")
 
 local Button = MM2Tab:CreateButton({
