@@ -206,10 +206,10 @@ end)
    end,
 })
 
-local GamecopyTab = Window:CreateTab("🌏Game Copy", nil)
-local Section = GamecopyTab:CreateSection("Game ")
+local GameTab = Window:CreateTab("🌏Game Copy", nil)
+local Section = GameTab:CreateSection("Game ")
 
-local Button = GamecopyTab:CreateButton({
+local Button = GameTab:CreateButton({
    Name = "Copy Game",
    Callback = function()
   		local Params = {
@@ -223,9 +223,4 @@ local CustomOptions = { SafeMode = true, timeout = 15, SaveBytecode = true, nosc
 
 synsaveinstance(CustomOptions)
    end,
-Rayfield:Notify({
-   Title = "Game Copy",
-   Content = "The Game is currently copying. When its done look in your executor workspace folder.",
-   Duration = 5,
-   Image = nil,
 })
