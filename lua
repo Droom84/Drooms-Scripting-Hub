@@ -128,7 +128,7 @@ end)-- The function that takes place when the button is pressed
 })
 
 local Toggle = MainTab:CreateToggle({
-   Name = "Teleport (E)",
+   Name = "Teleport (J)",
    CurrentValue = false,
    Flag = "Toggle1",
    Callback = function(Value)
@@ -155,7 +155,7 @@ local Toggle = MainTab:CreateToggle({
             connection = UserInputService.InputBegan:Connect(function(input, gameProcessed)
                 if gameProcessed then return end  -- Ignore inputs processed by UI
 
-                if input.KeyCode == Enum.KeyCode.E then
+                if input.KeyCode == Enum.KeyCode.J then
                     teleportToMouse()
                 end
             end)
@@ -170,39 +170,41 @@ local Toggle = MainTab:CreateToggle({
 })
 
 local Button = MainTab:CreateButton({
-   Name = "No Clip (J)",
+   Name = "No Clip (E)",
    Callback = function()
    		local player = game.Players.LocalPlayer
-local character = player.Character or player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
-
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local runservice = game:GetService("RunService")
 local noclip = false
 
--- Toggle noclip when the player presses the "J" key
-local function toggleNoclip()
-    noclip = not noclip
-end
-
--- Detect when the "J" key is pressed
-game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-    if input.KeyCode == Enum.KeyCode.J then
-        toggleNoclip()
-    end
-end)
-
--- Update the player's movement based on noclip status
-game:GetService("RunService").Heartbeat:Connect(function()
+ 
+runservice.Stepped:Connect(function()
     if noclip then
-        humanoid.PlatformStand = true
-        character.HumanoidRootPart.CanCollide = false
-        character:SetPrimaryPartCFrame(character.HumanoidRootPart.CFrame + character.HumanoidRootPart.Velocity)
-    else
-        humanoid.PlatformStand = false
-        character.HumanoidRootPart.CanCollide = true
+        player.Character.Humanoid:ChangeState(11)
+    end
+end)
+ 
+mouse.KeyDown:Connect(function(key)
+    if key == "m" then
+        noclip = true
+        player.Character.Humanoid:ChangeState(11)
     end
 end)
 
+mouse.KeyDown:Connect(function(key)
+    if key == "z" then
+        noclip = false
+        player.Character.Humanoid:ChangeState(11)
+    end
+end)
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Infinate Yield",
+   Callback = function()
+   		loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))() 
    end,
 })
 
