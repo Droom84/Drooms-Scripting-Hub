@@ -254,8 +254,8 @@ local Button = ArsenalTab:CreateButton({
    end,
 })
 
-local MmlTab = Window:CreateTab("🔪 MM2", nil)
-local Section = MmTab:CreateSection("MM2")
+local MM2lTab = Window:CreateTab("🔪 MM2", nil)
+local Section = MM2Tab:CreateSection("MM2")
 
 local Button = MM2Tab:CreateButton({
    Name = "MM2 Cheat Menu",
