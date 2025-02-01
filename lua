@@ -661,7 +661,7 @@ local Button = ArsenalTab:CreateButton({
    Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
    end,
-})
+)
 
 local MM2Tab = Window:CreateTab("🔪 MM2", nil)
 local Section = MM2Tab:CreateSection("MM2")
