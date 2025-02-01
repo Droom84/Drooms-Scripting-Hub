@@ -347,3 +347,13 @@ local Button = RivalsTab:CreateButton({
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/EzWinsV4/FlameForRobloxRivals/refs/heads/main/Main.lua", true))()
    end,
 })
+
+local TrollTab = Window:CreateTab("Trolling", nil) -- Title, Image
+local Section = TrollTab:CreateSection("Trolling")
+
+local Button = TrollingTab:CreateButton({
+   Name = "Troll Animation GUI",
+   Callback = function()
+	loadstring(game:HttpGet("https://pastebin.com/raw/093VxNLa"))() 
+   end,
+})
