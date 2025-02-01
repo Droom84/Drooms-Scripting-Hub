@@ -659,7 +659,7 @@ local Section = ArsenalTab:CreateSection("Arsenal")
 local Button = ArsenalTab:CreateButton({
    Name = "Arsenal Cheat Menu",
    Callback = function()
-      loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
    end
 }) -- Fixed the syntax error here by removing the extra closing parenthesis
 
