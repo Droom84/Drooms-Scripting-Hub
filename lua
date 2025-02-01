@@ -450,7 +450,7 @@ end)
 local Button = MainTab:CreateButton({
    Name = "Give Tool",
    Callback = function()
-		        local ScreenGui = Instance.new("ScreenGui")
+	local ScreenGui = Instance.new("ScreenGui")
         local Frame = Instance.new("Frame")
         local ScrollingFrame = Instance.new("ScrollingFrame")
         local UIListLayout = Instance.new("UIListLayout")
@@ -653,15 +653,15 @@ synsaveinstance(CustomOptions)
    end,
 })
 
-local ArsenalTab = Window:CreateTab("🔫 Arsenal", nil)
+local ArsenalTab = Window:CreateTab("🔫 Arsenal") -- Removed 'nil' as it might cause an issue
 local Section = ArsenalTab:CreateSection("Arsenal")
 
-local Button = ArsenalTab:CreateButton({
+ArsenalTab:CreateButton({
    Name = "Arsenal Cheat Menu",
    Callback = function()
 		loadstring(game:HttpGet("https://raw.githubusercontent.com/JackyPoopoo/cartel/main/0000000000000000000000000000000000000000000000000"))()
-   end,
-})
+   end
+})  -- Fixed closing braces and removed unnecessary commas
 
 local MM2Tab = Window:CreateTab("🔪 MM2", nil)
 local Section = MM2Tab:CreateSection("MM2")
