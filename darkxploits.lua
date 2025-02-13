@@ -29,11 +29,8 @@ local Window = Rayfield:CreateWindow({
       Note = "Join https://discord.gg/EtsPBjn6s6 for the key.", -- Use this to tell the user how to get a key
       FileName = "DarkXploitskey", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
-      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"FTY32FTYFTEWYYT2"}, -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
-      Key = {"DarkXploits-Affiliate-G324G234"},
-      Key = {"DarkXploits-Staff-FT23F76DT"},
-      Key = {"DarkXploits-Owner-D276DD6DTTD76D6-D2G7D2DTD3676-HD23782D872"}-- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"https://pastebin.com/raw/UckGFihg"}, -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
