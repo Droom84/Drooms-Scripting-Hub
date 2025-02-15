@@ -98,5 +98,8 @@ local function toggleFlying(Value)
 end
 
 -- Example toggle call based on a UI toggle (you need to call this when your toggle is clicked)
+-- You can call this toggleFlying(true) to enable flying or toggleFlying(false) to disable flying
+
+-- Example usage:
 toggleFlying(true)  -- Turn on flying
 -- toggleFlying(false) -- Turn off flying (use false to disable the toggle)
