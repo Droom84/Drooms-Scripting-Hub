@@ -5,7 +5,7 @@ local rootPart = character:WaitForChild("HumanoidRootPart")
 
 local flying = false
 local flySpeed = 100
-local flyingEnabled = false  -- This controls whether flying is enabled or not
+local flyingEnabled = false
 local bodyVelocity = nil
 
 -- Start flying function
@@ -67,7 +67,10 @@ local function stopFlying()
 end
 
 -- Listen for key press to toggle flying
-local function onInputBegan(input)
+local function onInputBegan(input, gameProcessedEvent)
+    -- Ensure the key is not being processed by the game (such as opening inventory, etc.)
+    if gameProcessedEvent then return end
+    
     if flyingEnabled then
         print("Key press detected: " .. input.KeyCode)
         if input.KeyCode == Enum.KeyCode.Y then
