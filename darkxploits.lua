@@ -2,9 +2,9 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "DarkXploits",
-   Icon = 103644919467149, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   Icon = 133904807399899, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
    LoadingTitle = "DarkXploits",
-   LoadingSubtitle = "by Droom_2&Burger",
+   LoadingSubtitle = "Current Version: V0.0.1",
    Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
 
    DisableRayfieldPrompts = false,
@@ -30,7 +30,7 @@ local Window = Rayfield:CreateWindow({
       FileName = "DarkXploitskey", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
       SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
       GrabKeyFromSite = true, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
-      Key = {"https://pastebin.com/raw/UckGFihg"}, -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+      Key = {"https://pastebin.com/raw/c0wNHW3X", "https://pastebin.com/raw/KyqbdnN8", "https://pastebin.com/raw/U9fLyrZ6", "https://pastebin.com/raw/Fa2fzLzu"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
    }
 })
 
@@ -41,11 +41,11 @@ Rayfield:Notify({
    Title = "Notification",
    Content = "Thank you for using DarkXploits.",
    Duration = 5,
-   Image = nil,
+   Image = 133904807399899,
 })
 
 local Button = MainTab:CreateButton({
-   Name = "Infinite Jump",
+   Name = "Fly Jump",
    Callback = function()
 local InfiniteJumpEnabled = true
 game:GetService("UserInputService").JumpRequest:connect(function()
@@ -172,32 +172,18 @@ local Toggle = MainTab:CreateToggle({
 local Button = MainTab:CreateButton({
    Name = "No Clip (E)",
    Callback = function()
-   		local player = game.Players.LocalPlayer
-local player = game.Players.LocalPlayer
-local mouse = player:GetMouse()
-local runservice = game:GetService("RunService")
-local noclip = false
-
- 
-runservice.Stepped:Connect(function()
-    if noclip then
-        player.Character.Humanoid:ChangeState(11)
-    end
-end)
- 
-mouse.KeyDown:Connect(function(key)
-    if key == "m" then
-        noclip = true
-        player.Character.Humanoid:ChangeState(11)
-    end
-end)
-
-mouse.KeyDown:Connect(function(key)
-    if key == "z" then
-        noclip = false
-        player.Character.Humanoid:ChangeState(11)
-    end
-end)
+   		runService.RenderStepped:Connect(
+                function()
+                    if getgenv().NoClipEnabled and localPlayer.Character then
+                        for _, part in pairs(localPlayer.Character:GetDescendants()) do
+                            if part:IsA("BasePart") then
+                            
+                                part.CanCollide = false
+                            end
+                        end
+                    end
+                end
+            )
    end,
 })
 
@@ -348,12 +334,12 @@ local Button = RivalsTab:CreateButton({
    end,
 })
 
-local TrollTab = Window:CreateTab("Trolling", nil) -- Title, Image
-local Section = TrollTab:CreateSection("Trolling")
+local TrollingTab = Window:CreateTab("🤡 Trolling", nil) -- Title, Image
+local Section = TrollingTab:CreateSection("Trolling")
 
 local Button = TrollingTab:CreateButton({
    Name = "Troll Animation GUI",
    Callback = function()
-	loadstring(game:HttpGet("https://pastebin.com/raw/093VxNLa"))() 
+	loadstring(game:HttpGet("https://pastebin.com/raw/093VxNLa"))()
    end,
 })
