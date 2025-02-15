@@ -7,8 +7,16 @@ local flying = false
 local flySpeed = 100
 local flyingEnabled = false
 local bodyVelocity = nil
+local flyScript
 
--- Function to start flying using external script
+-- Function to load the fly script once
+local function loadFlyScript()
+    if not flyScript then
+        flyScript = loadstring(game:HttpGet('https://raw.githubusercontent.com/Droom84/Drooms-Scripting-Hub/refs/heads/main/fly.lua'))()
+    end
+end
+
+-- Function to start flying
 local function startFlying()
     if flying then
         print("Already flying!")
@@ -16,10 +24,7 @@ local function startFlying()
     end
     print("Starting to fly...")
 
-    -- Load the external fly script
-    local flyScript = loadstring(game:HttpGet('https://raw.githubusercontent.com/Droom84/Drooms-Scripting-Hub/refs/heads/main/fly.lua'))
-    flyScript()  -- Execute the external script
-
+    -- Start flying logic
     flying = true
     bodyVelocity = Instance.new("BodyVelocity")
     bodyVelocity.MaxForce = Vector3.new(1000000, 1000000, 1000000)
@@ -100,7 +105,9 @@ local function toggleFlying(Value)
     flyingEnabled = Value
     print("Flying enabled: " .. tostring(flyingEnabled))  -- Debugging the toggle state
 
-    if not flyingEnabled then
+    if flyingEnabled then
+        loadFlyScript()  -- Load the script only when enabling flying
+    else
         stopFlying()  -- Ensure we stop flying when toggled off
     end
 end
@@ -111,4 +118,3 @@ end
 -- Example usage:
 toggleFlying(true)  -- Turn on flying
 -- toggleFlying(false) -- Turn off flying (use false to disable the toggle)
-
