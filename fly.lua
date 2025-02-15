@@ -4,13 +4,13 @@ local humanoid = character:WaitForChild("Humanoid")
 local rootPart = character:WaitForChild("HumanoidRootPart")
 
 local flying = false
-local flySpeed = 100 -- Speed at which the player flies
-local flyingEnabled = false  -- Add a new variable to track whether flying is enabled
-
-local bodyVelocity = nil  -- This will be created once flying starts
+local flySpeed = 100
+local flyingEnabled = false  -- This is your toggle condition
+local bodyVelocity = nil
 
 -- Start flying function
 local function startFlying()
+    if flying then return end -- Prevent starting if already flying
     flying = true
     bodyVelocity = Instance.new("BodyVelocity")
     bodyVelocity.MaxForce = Vector3.new(1000000, 1000000, 1000000)
@@ -19,9 +19,11 @@ local function startFlying()
 
     local userInputService = game:GetService("UserInputService")
 
+    -- Fly loop
     while flying do
         local moveDirection = Vector3.new(0, 0, 0)
-        
+
+        -- Checking WASD and space/shift for flying controls
         if userInputService:IsKeyDown(Enum.KeyCode.W) then
             moveDirection = moveDirection + workspace.CurrentCamera.CFrame.LookVector
         end
@@ -40,7 +42,7 @@ local function startFlying()
         if userInputService:IsKeyDown(Enum.KeyCode.LeftShift) then
             moveDirection = moveDirection - Vector3.new(0, 1, 0)
         end
-        
+
         bodyVelocity.Velocity = moveDirection * flySpeed
         wait(0.1)
     end
@@ -48,13 +50,15 @@ end
 
 -- Stop flying function
 local function stopFlying()
+    if not flying then return end  -- Prevent stopping if already stopped
     flying = false
     if bodyVelocity then
         bodyVelocity:Destroy()
+        bodyVelocity = nil
     end
 end
 
--- The input handler now checks if flying is enabled and only listens to the "Y" key if it is
+-- Listen for key press to toggle flying
 local function onInputBegan(input)
     if flyingEnabled and input.KeyCode == Enum.KeyCode.Y then
         if flying then
@@ -67,16 +71,14 @@ end
 
 game:GetService("UserInputService").InputBegan:Connect(onInputBegan)
 
--- Function to enable or disable flying based on the toggle state
+-- Toggle function: Turn flying on or off
 local function toggleFlying(Value)
-    if Value then
-        flyingEnabled = true  -- Enable the keybind for flying
-    else
-        flyingEnabled = false -- Disable the keybind for flying
-        stopFlying()           -- Stop flying if it's currently on
+    flyingEnabled = Value
+    if not flyingEnabled then
+        stopFlying()  -- Ensure we stop flying when toggled off
     end
 end
 
--- Example of calling the toggleFlying function
--- Replace this with your actual toggle call
-toggleFlying(true)  -- This would enable flying, change it based on the toggle
+-- Example toggle call based on a UI toggle (you need to call this when your toggle is clicked)
+toggleFlying(true)  -- Turn on flying
+-- toggleFlying(false) -- Turn off flying (use false to disable the toggle)
