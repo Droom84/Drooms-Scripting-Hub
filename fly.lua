@@ -10,7 +10,11 @@ local bodyVelocity = nil
 
 -- Start flying function
 local function startFlying()
-    if flying then return end -- Prevent starting if already flying
+    if flying then
+        print("Already flying!")
+        return
+    end
+    print("Starting to fly...")
     flying = true
     bodyVelocity = Instance.new("BodyVelocity")
     bodyVelocity.MaxForce = Vector3.new(1000000, 1000000, 1000000)
@@ -50,7 +54,11 @@ end
 
 -- Stop flying function
 local function stopFlying()
-    if not flying then return end  -- Prevent stopping if already stopped
+    if not flying then
+        print("Already stopped flying!")
+        return
+    end
+    print("Stopping flying...")
     flying = false
     if bodyVelocity then
         bodyVelocity:Destroy()
@@ -60,11 +68,14 @@ end
 
 -- Listen for key press to toggle flying
 local function onInputBegan(input)
-    if flyingEnabled and input.KeyCode == Enum.KeyCode.Y then
-        if flying then
-            stopFlying()
-        else
-            startFlying()
+    if flyingEnabled then
+        print("Key press detected: " .. input.KeyCode)
+        if input.KeyCode == Enum.KeyCode.Y then
+            if flying then
+                stopFlying()
+            else
+                startFlying()
+            end
         end
     end
 end
@@ -74,6 +85,7 @@ game:GetService("UserInputService").InputBegan:Connect(onInputBegan)
 -- Toggle function: Turn flying on or off
 local function toggleFlying(Value)
     flyingEnabled = Value
+    print("Flying enabled: " .. tostring(flyingEnabled))  -- Debugging the toggle state
     if not flyingEnabled then
         stopFlying()  -- Ensure we stop flying when toggled off
     end
