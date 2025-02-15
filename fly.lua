@@ -5,7 +5,7 @@ local rootPart = character:WaitForChild("HumanoidRootPart")
 
 local flying = false
 local flySpeed = 100
-local flyingEnabled = false  -- This is your toggle condition
+local flyingEnabled = false  -- This controls whether flying is enabled or not
 local bodyVelocity = nil
 
 -- Start flying function
@@ -84,8 +84,14 @@ game:GetService("UserInputService").InputBegan:Connect(onInputBegan)
 
 -- Toggle function: Turn flying on or off
 local function toggleFlying(Value)
+    if flyingEnabled == Value then
+        print("Flying is already in the desired state: " .. tostring(flyingEnabled))
+        return
+    end
+
     flyingEnabled = Value
     print("Flying enabled: " .. tostring(flyingEnabled))  -- Debugging the toggle state
+
     if not flyingEnabled then
         stopFlying()  -- Ensure we stop flying when toggled off
     end
