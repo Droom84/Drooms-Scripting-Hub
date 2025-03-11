@@ -1,10 +1,10 @@
--- Starlit ModuleScript
+-- StarlitLibrary.lua
 
 local Starlit = {}
 Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("User  InputService")
+local UserInputService = game:GetService("User InputService")
 
 -- Variable to hold the window
 local window
@@ -107,3 +107,27 @@ function Starlit:AnimateWindow(frame)
 end
 
 -- Function to close the window
+function Starlit:CloseWindow()
+    if window then
+        -- Animate the frame to swipe out to the right
+        local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        local swipeOutTween = TweenService:Create(window.Frame, tweenInfo, {Position = UDim2.new(1, 0, 0.25, 0)}) -- Move off-screen to the right
+        swipeOutTween:Play()
+
+        -- Show notification after the swipe-out animation
+        swipeOutTween.Completed:Wait() -- Wait for the animation to complete
+        self:ShowNotification("To open the panel again please press 'B' on your keyboard.")
+
+        window:Destroy() -- Destroy the window when closed
+        isOpen = false -- Update the state
+    end
+end
+
+-- Function to toggle the window
+function Starlit:ToggleWindow()
+    if isOpen then
+        self:CloseWindow()
+    else
+        self:CreateWindow({
+            Name = "Starlit Example Window",
+            Loading
