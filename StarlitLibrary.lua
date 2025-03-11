@@ -4,7 +4,7 @@ local Starlit = {}
 Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("User InputService")
+local UserInputService = game:GetService("User  InputService")
 
 -- Variable to hold the window
 local window
