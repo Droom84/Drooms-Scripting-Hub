@@ -11,6 +11,7 @@ function Starlit:CreateWindow(options)
     local frame = Instance.new("Frame")
     local titleLabel = Instance.new("TextLabel")
     local subtitleLabel = Instance.new("TextLabel")
+    local closeButton = Instance.new("ImageButton") -- Close button
 
     -- Set up the window properties
     window.Name = options.Name or "StarlitWindow"
@@ -35,6 +36,18 @@ function Starlit:CreateWindow(options)
     subtitleLabel.Text = options.LoadingSubtitle or "by YourName"
     subtitleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
     subtitleLabel.Parent = frame
+
+    -- Close Button
+    closeButton.Size = UDim2.new(0, 30, 0, 30) -- Size of the close button
+    closeButton.Position = UDim2.new(1, -40, 0, 5) -- Position it in the top right corner
+    closeButton.Image = "rbxassetid://106498149854720" -- Set the image ID for the close button
+    closeButton.BackgroundTransparency = 1 -- Make the background transparent
+    closeButton.Parent = frame
+
+    -- Close button functionality
+    closeButton.MouseButton1Click:Connect(function()
+        window:Destroy() -- Destroy the window when the close button is clicked
+    end)
 
     -- Optional properties
     if options.Icon then
