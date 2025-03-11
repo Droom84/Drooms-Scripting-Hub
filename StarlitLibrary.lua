@@ -12,6 +12,11 @@ local isOpen = false -- Track whether the window is open or closed
 
 -- Function to create a new window
 function Starlit:CreateWindow(options)
+    -- Check if the window is already open
+    if isOpen then
+        return -- If it's already open, do nothing
+    end
+
     window = Instance.new("ScreenGui")
     local frame = Instance.new("Frame")
     local titleLabel = Instance.new("TextLabel")
@@ -79,6 +84,9 @@ function Starlit:CreateWindow(options)
     -- Smooth animation for the window
     self:AnimateWindow(frame)
 
+    -- Set the window state to open
+    isOpen = true
+
     -- Listen for key input to toggle the window
     UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
         if not gameProcessedEvent and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.B then
@@ -111,18 +119,12 @@ function Starlit:ToggleWindow()
     if isOpen then
         self:CloseWindow()
     else
-        if not window then
-            self:CreateWindow({
-                Name = "Starlit Example Window",
-                LoadingTitle = "Starlit Interface Suite",
-                LoadingSubtitle = "by YourName",
-                -- Add other options as needed
-            })
-        else
-            window.Enabled = true -- Show the window if it exists
-            self:AnimateWindow(window.Frame) -- Animate the window
-        end
-        isOpen = true -- Update the state
+        self:CreateWindow({
+            Name = "Starlit Example Window",
+            LoadingTitle = "Starlit Interface Suite",
+            LoadingSubtitle = "by YourName",
+            -- Add other options as needed
+        })
     end
 end
 
