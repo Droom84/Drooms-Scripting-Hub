@@ -4,10 +4,15 @@ local Starlit = {}
 Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("User InputService")
+
+-- Variable to hold the window
+local window
+local isOpen = false -- Track whether the window is open or closed
 
 -- Function to create a new window
 function Starlit:CreateWindow(options)
-    local window = Instance.new("ScreenGui")
+    window = Instance.new("ScreenGui")
     local frame = Instance.new("Frame")
     local titleLabel = Instance.new("TextLabel")
     local subtitleLabel = Instance.new("TextLabel")
@@ -46,7 +51,7 @@ function Starlit:CreateWindow(options)
 
     -- Close button functionality
     closeButton.MouseButton1Click:Connect(function()
-        window:Destroy() -- Destroy the window when the close button is clicked
+        self:CloseWindow()
     end)
 
     -- Optional properties
@@ -74,6 +79,13 @@ function Starlit:CreateWindow(options)
     -- Smooth animation for the window
     self:AnimateWindow(frame)
 
+    -- Listen for key input to toggle the window
+    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+        if not gameProcessedEvent and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.B then
+            self:ToggleWindow()
+        end
+    end)
+
     return window, frame
 end
 
@@ -84,6 +96,34 @@ function Starlit:AnimateWindow(frame)
     -- Tween for the frame's background transparency
     local fadeInTween = TweenService:Create(frame, tweenInfo, {BackgroundTransparency = 0})
     fadeInTween:Play()
+end
+
+-- Function to close the window
+function Starlit:CloseWindow()
+    if window then
+        window:Destroy() -- Destroy the window when closed
+        isOpen = false -- Update the state
+    end
+end
+
+-- Function to toggle the window
+function Starlit:ToggleWindow()
+    if isOpen then
+        self:CloseWindow()
+    else
+        if not window then
+            self:CreateWindow({
+                Name = "Starlit Example Window",
+                LoadingTitle = "Starlit Interface Suite",
+                LoadingSubtitle = "by YourName",
+                -- Add other options as needed
+            })
+        else
+            window.Enabled = true -- Show the window if it exists
+            self:AnimateWindow(window.Frame) -- Animate the window
+        end
+        isOpen = true -- Update the state
+    end
 end
 
 return Starlit
