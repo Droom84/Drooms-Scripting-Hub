@@ -4,7 +4,7 @@ local Starlit = {}
 Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("User InputService")
+local UserInputService = game:GetService("User  InputService")
 
 -- Variable to hold the window
 local window
@@ -107,25 +107,3 @@ function Starlit:AnimateWindow(frame)
 end
 
 -- Function to close the window
-function Starlit:CloseWindow()
-    if window then
-        window:Destroy() -- Destroy the window when closed
-        isOpen = false -- Update the state
-    end
-end
-
--- Function to toggle the window
-function Starlit:ToggleWindow()
-    if isOpen then
-        self:CloseWindow()
-    else
-        self:CreateWindow({
-            Name = "Starlit Example Window",
-            LoadingTitle = "Starlit Interface Suite",
-            LoadingSubtitle = "by YourName",
-            -- Add other options as needed
-        })
-    end
-end
-
-return Starlit
