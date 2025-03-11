@@ -130,4 +130,51 @@ function Starlit:ToggleWindow()
     else
         self:CreateWindow({
             Name = "Starlit Example Window",
-            Loading
+            LoadingTitle = "Starlit Interface Suite",
+            LoadingSubtitle = "by YourName",
+            -- Add other options as needed
+        })
+    end
+end
+
+-- Function to show a notification
+function Starlit:ShowNotification(message)
+    local notification = Instance.new("ScreenGui")
+    local frame = Instance.new("Frame")
+    local textLabel = Instance.new("TextLabel")
+
+    -- Set up the notification properties
+    notification.Name = "Notification"
+    frame.Size = UDim2.new(0.3, 0, 0.1, 0)
+    frame.Position = UDim2.new(0.7, 0, 0.9, 0) -- Position it at the bottom right
+    frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+    frame.BackgroundTransparency = 0.5
+    frame.Parent = notification
+
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.Text = message
+    textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    textLabel.BackgroundTransparency = 1
+    textLabel.Parent = frame
+
+    notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Animate the notification
+    self:AnimateNotification(frame)
+
+    -- Automatically destroy the notification after a few seconds
+    wait(5)
+    notification:Destroy()
+end
+
+-- Function to animate the notification
+function Starlit:AnimateNotification(frame)
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    
+    -- Tween for the frame's position to swipe in
+    frame.Position = UDim2.new(0.7, 0, 1, 0) -- Start off-screen
+    local swipeInTween = TweenService:Create(frame, tweenInfo, {Position = UDim2.new(0.7, 0, 0.9, 0)}) -- Move to visible position
+    swipeInTween:Play()
+end
+
+return Starlit
