@@ -5,6 +5,7 @@ Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
 local Players = game:GetService("Players")
+local Lighting = game:GetService("Lighting")
 
 -- Variable to hold the window
 local window
@@ -41,7 +42,7 @@ function Starlit:CreateWindow(options)
     frame.Size = UDim2.new(0.5, 0, 0.5, 0)
     frame.Position = UDim2.new(1, 0, 0.25, 0) -- Start off-screen to the right
     frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-    frame.BackgroundTransparency = 1 -- Start transparent for fade-in effect
+    frame.BackgroundTransparency = 0.5 -- Make it semi-transparent
     frame.Parent = window
 
     -- Add rounded corners
@@ -75,6 +76,11 @@ function Starlit:CreateWindow(options)
     closeButton.MouseButton1Click:Connect(function()
         self:CloseWindow()
     end)
+
+    -- Add a blur effect
+    local blurEffect = Instance.new("BlurEffect")
+    blurEffect.Size = 10 -- Adjust the blur size as needed
+    blurEffect.Parent = Lighting -- Add the blur effect to the Lighting service
 
     window.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
 
@@ -131,7 +137,7 @@ function Starlit:ToggleWindow()
             KeySystem = true,
             KeySettings = {
                 Key = {"YourKeyHere"}, -- Replace with your key
-                UserKey = "User ProvidedKey" -- This should be provided by the user
+                UserKey = "User  ProvidedKey" -- This should be provided by the user
             }
         })
     end
@@ -177,4 +183,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit --dontknow
+return Starlit --out ig
