@@ -8,6 +8,7 @@ local Players = game:GetService("Players")
 
 -- Variable to hold the window
 local window
+local frame
 local isOpen = false -- Track whether the window is open or closed
 
 -- Function to create a new window
@@ -18,7 +19,7 @@ function Starlit:CreateWindow(options)
     end
 
     window = Instance.new("ScreenGui")
-    local frame = Instance.new("Frame")
+    frame = Instance.new("Frame")
     local titleLabel = Instance.new("TextLabel")
     local subtitleLabel = Instance.new("TextLabel")
     local closeButton = Instance.new("ImageButton") -- Close button
@@ -89,14 +90,15 @@ function Starlit:CloseWindow()
     if window then
         -- Animate the frame to swipe out to the right
         local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
-        local swipeOutTween = TweenService:Create(window.Frame, tweenInfo, {Position = UDim2.new(1, 0, 0.25, 0)}) -- Move off-screen to the right
+        local swipeOutTween = TweenService:Create(frame, tweenInfo, {Position = UDim2.new(1, 0, 0.25, 0)}) -- Move off-screen to the right
         swipeOutTween:Play()
 
         -- Show notification after the swipe-out animation
         swipeOutTween.Completed:Wait() -- Wait for the animation to complete
         self:ShowNotification("To open the panel again please press 'B' on your keyboard.")
 
-        window:Destroy() -- Destroy the window when closed
+        -- Hide the window instead of destroying it
+        window.Enabled = false
         isOpen = false -- Update the state
     end
 end
@@ -155,4 +157,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit ---yes
+return Starlit -- its me
