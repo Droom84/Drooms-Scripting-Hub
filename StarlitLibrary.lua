@@ -4,7 +4,7 @@ local Starlit = {}
 Starlit.__index = Starlit
 
 local TweenService = game:GetService("TweenService")
-local UserInputService = game:GetService("User InputService") -- Correct service name
+local Players = game:GetService("Players")
 
 -- Variable to hold the window
 local window
@@ -59,27 +59,7 @@ function Starlit:CreateWindow(options)
         self:CloseWindow()
     end)
 
-    -- Optional properties
-    if options.Icon then
-        -- Set icon if provided (you can implement this based on your design)
-    end
-
-    -- Configuration saving
-    if options.ConfigurationSaving and options.ConfigurationSaving.Enabled then
-        -- Implement configuration saving logic here
-    end
-
-    -- Discord integration
-    if options.Discord and options.Discord.Enabled then
-        -- Implement Discord integration logic here
-    end
-
-    -- Key system
-    if options.KeySystem then
-        -- Implement key system logic here
-    end
-
-    window.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    window.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
 
     -- Smooth animation for the window
     self:AnimateWindow(frame)
@@ -88,11 +68,14 @@ function Starlit:CreateWindow(options)
     isOpen = true
 
     -- Listen for key input to toggle the window
-    UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+    local function onInputBegan(input, gameProcessedEvent)
         if not gameProcessedEvent and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.B then
             self:ToggleWindow()
         end
-    end)
+    end
+
+    -- Connect the input event
+    game:GetService("User InputService").InputBegan:Connect(onInputBegan)
 
     return window, frame
 end
@@ -157,7 +140,7 @@ function Starlit:ShowNotification(message)
     textLabel.BackgroundTransparency = 1
     textLabel.Parent = frame
 
-    notification.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+    notification.Parent = Players.LocalPlayer:WaitForChild("PlayerGui")
 
     -- Animate the notification
     self:AnimateNotification(frame)
@@ -177,4 +160,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit --eee
+return Starlit --sigmas
