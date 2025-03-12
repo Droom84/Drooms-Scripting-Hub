@@ -18,11 +18,23 @@ function Starlit:CreateWindow(options)
         return -- If it's already open, do nothing
     end
 
+    -- Check for key system
+    if options.KeySystem and options.KeySettings then
+        local key = options.KeySettings.Key[1] -- Get the first key from the list
+        local userKey = options.KeySettings.UserKey -- This should be provided by the user
+
+        if userKey ~= key then
+            warn("Invalid key! Access denied.")
+            return
+        end
+    end
+
     window = Instance.new("ScreenGui")
     frame = Instance.new("Frame")
     local titleLabel = Instance.new("TextLabel")
     local subtitleLabel = Instance.new("TextLabel")
     local closeButton = Instance.new("ImageButton") -- Close button
+    local corner = Instance.new("UICorner") -- UICorner for rounded corners
 
     -- Set up the window properties
     window.Name = options.Name or "StarlitWindow"
@@ -31,6 +43,10 @@ function Starlit:CreateWindow(options)
     frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     frame.BackgroundTransparency = 1 -- Start transparent for fade-in effect
     frame.Parent = window
+
+    -- Add rounded corners
+    corner.Parent = frame
+    corner.CornerRadius = UDim.new(0, 15) -- Adjust the radius for smooth corners
 
     -- Title Label
     titleLabel.Size = UDim2.new(1, 0, 0.1, 0)
@@ -112,7 +128,11 @@ function Starlit:ToggleWindow()
             Name = "Starlit Example Window",
             LoadingTitle = "Starlit Interface Suite",
             LoadingSubtitle = "by YourName",
-            -- Add other options as needed
+            KeySystem = true,
+            KeySettings = {
+                Key = {"YourKeyHere"}, -- Replace with your key
+                UserKey = "User ProvidedKey" -- This should be provided by the user
+            }
         })
     end
 end
@@ -157,4 +177,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit -- its me
+return Starlit --dontknow
