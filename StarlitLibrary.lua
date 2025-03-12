@@ -67,16 +67,6 @@ function Starlit:CreateWindow(options)
     -- Set the window state to open
     isOpen = true
 
-    -- Listen for key input to toggle the window
-    local function onInputBegan(input, gameProcessedEvent)
-        if not gameProcessedEvent and input.UserInputType == Enum.UserInputType.Keyboard and input.KeyCode == Enum.KeyCode.B then
-            self:ToggleWindow()
-        end
-    end
-
-    -- Connect the input event
-    game:GetService("User InputService").InputBegan:Connect(onInputBegan)
-
     return window, frame
 end
 
@@ -160,4 +150,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit --sigmas
+return Starlit -- I am him!
