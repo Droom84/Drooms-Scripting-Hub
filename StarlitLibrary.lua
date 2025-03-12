@@ -26,7 +26,7 @@ function Starlit:CreateWindow(options)
     -- Set up the window properties
     window.Name = options.Name or "StarlitWindow"
     frame.Size = UDim2.new(0.5, 0, 0.5, 0)
-    frame.Position = UDim2.new(0.25, 0, 0.25, 0)
+    frame.Position = UDim2.new(1, 0, 0.25, 0) -- Start off-screen to the right
     frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
     frame.BackgroundTransparency = 1 -- Start transparent for fade-in effect
     frame.Parent = window
@@ -77,6 +77,11 @@ function Starlit:AnimateWindow(frame)
     -- Tween for the frame's background transparency
     local fadeInTween = TweenService:Create(frame, tweenInfo, {BackgroundTransparency = 0})
     fadeInTween:Play()
+
+    -- Tween for the frame's position to slide in from the right
+    frame.Position = UDim2.new(1, 0, 0.25, 0) -- Start off-screen to the right
+    local slideInTween = TweenService:Create(frame, tweenInfo, {Position = UDim2.new(0.25, 0, 0.25, 0)}) -- Move to visible position
+    slideInTween:Play()
 end
 
 -- Function to close the window
@@ -150,4 +155,4 @@ function Starlit:AnimateNotification(frame)
     swipeInTween:Play()
 end
 
-return Starlit -- I am him!
+return Starlit ---yes
